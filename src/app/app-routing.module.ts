@@ -7,8 +7,12 @@ const routes: Routes = [
     loadChildren: () => import('../app/core/about/about.module').then(m => m.AboutModule)
   },
   {
+    path: 'users',
+    loadChildren: () => import('../app/core/user-list/user.module').then(m => m.UserModule)
+  },
+  {
     path: '',
-    redirectTo: '',
+    redirectTo: 'users',
     pathMatch: 'full'
   }
 ];
