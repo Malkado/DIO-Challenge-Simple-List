@@ -33,3 +33,9 @@ width: 50%;
   height: 80px;
   border-radius: 50px;
 }
+
+.title{
+  font-weight: 800;
+  font-size: 14px;
+  color: rgb(0, 153, 255);
+}

@@ -8,9 +8,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <app-table-row></app-table-row>
+        <tr *ngFor="let user of user">
+          <app-table-row [user]="user"></app-table-row>
         </tr>
+
 
       </tbody>
     </table>
