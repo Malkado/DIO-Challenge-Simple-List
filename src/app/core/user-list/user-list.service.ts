@@ -33,6 +33,12 @@ export class UserListService {
   }
   // UPDATE
   updateUser(user: any): Promise<any> {
-    return this.http.put(this.url + 'users', user).toPromise();
+    console.log(user);
+    return this.http.put(this.url + 'users/' + user.id, user).toPromise();
+  }
+
+  // Create
+  createUser(user: any): Promise<any> {
+    return this.http.post(this.url + 'users', user).toPromise();
   }
 }

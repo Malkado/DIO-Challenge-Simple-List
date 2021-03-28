@@ -1,4 +1,9 @@
-<main class="d-flex align-center justify-content-center">
+<main class="d-flex align-center justify-content-center flex-column">
+  <!-- <header>-->
+    <div class="col-3">
+      <button type="button" class="btn btn-primary" (click)="openModal()">Save</button>
+    </div>
+ <!--  </header> -->
   <div class="p-12 col-md-9">
     <table class="table">
       <thead>
@@ -9,7 +14,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of user">
-          <app-table-row (delete)="removeUser($event)" [setclose]="closeModal" [user]="user"></app-table-row>
+          <app-table-row (create)="creteUser($event)" (update)="updateUser($event)" (delete)="removeUser($event)"
+            [setclose]="closeModal" [user]="user"></app-table-row>
         </tr>
 
 

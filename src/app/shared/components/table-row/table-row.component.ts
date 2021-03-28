@@ -1,5 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserListService } from 'src/app/core/user-list/user-list.service';
 import { User } from '../../../core/user-list/user-interfaces';
 @Component({
@@ -7,41 +6,50 @@ import { User } from '../../../core/user-list/user-interfaces';
   templateUrl: './table-row.component.html',
   styleUrls: ['./table-row.component.css']
 })
-export class TableRowComponent implements OnInit, OnChanges {
+export class TableRowComponent implements OnInit {
   @Input()
   user: User | any;
-  // @ViewChild('closeModal') closeModal: ElementRef;
+
+  isUpdating = false;
 
   @Input()
   setclose = false;
   @Output() delete: EventEmitter<any> = new EventEmitter();
   @Output() update: EventEmitter<any> = new EventEmitter();
+  @Output() create: EventEmitter<any> = new EventEmitter();
   constructor(
     private userService: UserListService
   ) {
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    console.log(changes.setclose.firstChange);
-    if (changes.setclose.firstChange) {
-      const modalButtonClose = document.getElementById('closeModal');
-      console.log(modalButtonClose);
-      modalButtonClose ? modalButtonClose.click() : alert('error!');
-    }
-  }
+
 
   ngOnInit(): void {
     // tslint:disable-next-line: deprecation
     this.userService.modalClose.subscribe(status => {
       if (status) {
-        console.log(status);
         this.setCloseModal();
+      }
+      else {
+        this.setOpenModal();
       }
     });
   }
   setCloseModal(): void {
     const modalButtonClose = document.getElementById('closeModal');
     modalButtonClose ? modalButtonClose.click() : alert('error!');
+  }
+
+  setOpenModal(): void {
+    const modalButtonOpen = document.getElementById('openModal');
+    modalButtonOpen ? modalButtonOpen.click() : alert('error!');
+  }
+
+
+  openCreate(): void {
+    this.isUpdating = false;
+  }
+  openUpdate(): void {
+    this.isUpdating = true;
 
   }
 
@@ -51,5 +59,8 @@ export class TableRowComponent implements OnInit, OnChanges {
 
   updateUser(): void {
     this.update.emit(this.user);
+  }
+  createUser(): void {
+    this.create.emit(this.user);
   }
 }

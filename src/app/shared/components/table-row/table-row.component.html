@@ -1,3 +1,4 @@
+<button (click)="openCreate()" hidden id="openModal" data-toggle="modal" data-target="#modalUser"></button>
 <div>
   <div class="container">
     <div class="data-info">
@@ -11,8 +12,8 @@
       </div>
     </div>
     <div class="configuration">
-      <button type="button" class="btn btn-primary p-1 m-1"><i class="fa fa-pencil" aria-hidden="true"
-          data-toggle="modal" data-target="#modalUser"></i></button>
+      <button type="button" class="btn btn-primary p-1 m-1" (click)="openUpdate()" data-toggle="modal"
+        data-target="#modalUser"><i class="fa fa-pencil" aria-hidden="true"></i></button>
       <button type="button" class="btn btn-danger p-1 m-1" (click)="removeUser(user.id)"><i class="fa fa-trash-o"
           aria-hidden="true"></i></button>
     </div>
@@ -33,13 +34,14 @@
         <div class="modal-inputs">
           <img class="image" [src]="user.image" alt="perfil-image">
           <label> Name</label>
-          <input type="text" [(ngModel)]="user.name"  class="form-control" placeholder="Name">
+          <input type="text" [(ngModel)]="user.name" class="form-control" placeholder="Name">
           <label> E-mail</label>
           <input type="text" [(ngModel)]="user.email" class="form-control" placeholder="E-Mail">
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="updateUser()">Save</button>
+        <button *ngIf="isUpdating" type="button" class="btn btn-primary" (click)="updateUser()">Update</button>
+        <button *ngIf="!isUpdating" type="button" class="btn btn-primary" (click)="createUser()">Save</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>

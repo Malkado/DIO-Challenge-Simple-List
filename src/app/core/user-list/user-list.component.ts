@@ -8,7 +8,7 @@ import { User } from '../../core/user-list/user-interfaces';
 })
 export class UserListComponent implements OnInit {
   user: User[] = [];
-  closeModal = false;
+  closeModal = true;
   constructor(
     private userService: UserListService
   ) { }
@@ -37,6 +37,24 @@ export class UserListComponent implements OnInit {
         this.userService.changeModalStatus(true);
         this.allUsers();
       });
+  }
+
+  creteUser(user: any): void {
+    const data = {
+      name: user.name,
+      email: user.email,
+      image: user.image ? user.image : 'https://pbs.twimg.com/profile_images/1249959893479706624/Gp7rlzXs.jpg'
+    };
+    this.userService.createUser(data)
+      .then(response => {
+        this.userService.changeModalStatus(true);
+        this.allUsers();
+      });
+  }
+
+  openModal(): void {
+    this.userService.changeModalStatus(false);
+
   }
 
 }
