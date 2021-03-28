@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of user">
-          <app-table-row [user]="user"></app-table-row>
+          <app-table-row (delete)="removeUser($event)" [setclose]="closeModal" [user]="user"></app-table-row>
         </tr>
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserListService } from '../../core/user-list/user-list.service';
 import { User } from '../../core/user-list/user-interfaces';
 @Component({
@@ -8,6 +8,7 @@ import { User } from '../../core/user-list/user-interfaces';
 })
 export class UserListComponent implements OnInit {
   user: User[] = [];
+  closeModal = false;
   constructor(
     private userService: UserListService
   ) { }
@@ -21,6 +22,21 @@ export class UserListComponent implements OnInit {
         this.user = response;
       }
     });
+  }
+
+  removeUser(id: number): void {
+    this.userService.removeUser(id).then(response => {
+      console.log(response);
+      this.allUsers();
+    });
+  }
+
+  updateUser(user: any): void {
+    this.userService.updateUser(user)
+      .then(response => {
+        this.userService.changeModalStatus(true);
+        this.allUsers();
+      });
   }
 
 }

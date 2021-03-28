@@ -2,17 +2,46 @@
   <div class="container">
     <div class="data-info">
       <div>
-        <img class="image" src="../../../../assets/images/Imagem-Perfil.jpg" alt="perfil-image">
+        <img class="image" [src]="user.image" alt="perfil-image">
       </div>
       <div class="data-label">
-        <label class="title">Luiz Henrique</label>
-        <label class="email"><i class="fa fa-envelope-o" aria-hidden="true"></i>luizhenrique@email.com</label>
+        <label class="title">{{ user.name }}</label>
+        <label class="email"><i class="fa fa-envelope-o" aria-hidden="true"></i>{{ user.email }}</label>
         <span>Added on 07/02/2015 08:56PM</span>
       </div>
     </div>
     <div class="configuration">
-      <button type="button" class="btn btn-primary p-1 m-1"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-      <button type="button" class="btn btn-danger p-1 m-1"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary p-1 m-1"><i class="fa fa-pencil" aria-hidden="true"
+          data-toggle="modal" data-target="#modalUser"></i></button>
+      <button type="button" class="btn btn-danger p-1 m-1" (click)="removeUser(user.id)"><i class="fa fa-trash-o"
+          aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="closeModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-inputs">
+          <img class="image" [src]="user.image" alt="perfil-image">
+          <label> Name</label>
+          <input type="text" [(ngModel)]="user.name"  class="form-control" placeholder="Name">
+          <label> E-mail</label>
+          <input type="text" [(ngModel)]="user.email" class="form-control" placeholder="E-Mail">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="updateUser()">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
     </div>
   </div>
 </div>
