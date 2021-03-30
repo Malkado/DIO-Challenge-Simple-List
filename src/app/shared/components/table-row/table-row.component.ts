@@ -25,26 +25,16 @@ export class TableRowComponent implements OnInit {
 
   ngOnInit(): void {
     // tslint:disable-next-line: deprecation
-    this.userService.modalClose.subscribe(status => {
-      console.log(status);
-      if (status) {
-        this.setCloseModal();
-      }
-      else if (status === false) {
-        this.setOpenModal();
-      }
-    });
+    // this.userService.modalClose.subscribe(status => {
+    //   console.log(status);
+    //   if (status) {
+    //     this.setCloseModal();
+    //   }
+    //   else if (status === false) {
+    //     this.setOpenModal();
+    //   }
+    // });
   }
-  setCloseModal(): void {
-    const modalButtonClose = document.getElementById('closeModal');
-    modalButtonClose ? modalButtonClose.click() : alert('error!');
-  }
-
-  setOpenModal(): void {
-    const modalButtonOpen = document.getElementById('openModal');
-    modalButtonOpen ? modalButtonOpen.click() : alert('error!');
-  }
-
 
   openCreate(): void {
     this.isUpdating = false;
@@ -62,7 +52,5 @@ export class TableRowComponent implements OnInit {
   updateUser(): void {
     this.update.emit(this.user);
   }
-  createUser(): void {
-    this.create.emit(this.user);
-  }
+
 }

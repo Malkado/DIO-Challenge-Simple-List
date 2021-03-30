@@ -10,6 +10,7 @@ import { UserModalComponent } from '../user-modal/user-modal.component';
 })
 export class UserListComponent implements OnInit {
   user: User[] = [];
+  setUser: User | any;
   closeModal = true;
   constructor(
     private userService: UserListService,
@@ -18,6 +19,10 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.allUsers();
+    // tslint:disable-next-line: deprecation
+    this.userService.modalClose.subscribe(value => {
+      this.allUsers();
+    });
   }
   allUsers(): void {
     this.userService.allUsers().then(response => {
@@ -34,30 +39,25 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  updateUser(user: any): void {
-    this.userService.updateUser(user)
-      .then(response => {
-        this.userService.changeModalStatus(true);
-        this.allUsers();
-      });
-  }
 
-  creteUser(user: any): void {
-    const data = {
-      name: user.name,
-      email: user.email,
-      image: user.image ? user.image : 'https://pbs.twimg.com/profile_images/1249959893479706624/Gp7rlzXs.jpg'
-    };
-    this.userService.createUser(data)
-      .then(response => {
-        this.userService.changeModalStatus(true);
-        this.allUsers();
-      });
-  }
 
-  openModal(): void {
+  // creteUser(user: any): void {
+  //   const data = {
+  //     name: user.name,
+  //     email: user.email,
+  //     image: user.image ? user.image : 'https://pbs.twimg.com/profile_images/1249959893479706624/Gp7rlzXs.jpg'
+  //   };
+  //   this.userService.createUser(data)
+  //     .then(response => {
+  //       this.allUsers();
+  //     });
+  // }
+
+
+  openModal(userSet?: User, isUpdating?: boolean): void {
+    const dataModal = isUpdating ? { user: userSet, updating: isUpdating } : { user: userSet };
     this.dialog.open(UserModalComponent, {
-      data: { user: this.user }
+      data: dataModal
     });
 
     // dialogRef.afterClosed().subscribe(result => {

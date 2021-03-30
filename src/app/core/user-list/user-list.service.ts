@@ -9,14 +9,14 @@ export class UserListService {
 
   private url = environment.serverUrl;
 
-  private objectData = new BehaviorSubject<boolean>(false);
+  private objectData = new BehaviorSubject<any>(null);
   modalClose = this.objectData.asObservable();
 
   constructor(
     private http: HttpClient
   ) { }
 
-  changeModalStatus(status: boolean): void {
+  changeModalStatus(status: any): void {
     this.objectData.next(status);
   }
   // Read all

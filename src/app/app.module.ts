@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModalComponent } from './core/user-modal/user-modal.component';
-import { UserModalModule } from './core/user-modal/user-modal.module';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserModalComponent
   ],
   imports: [
     RouterModule,
@@ -18,7 +20,8 @@ import { UserModalModule } from './core/user-modal/user-modal.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    UserModalModule
+    MatButtonModule,
+    FormsModule
   ],
   entryComponents: [UserModalComponent],
   providers: [],

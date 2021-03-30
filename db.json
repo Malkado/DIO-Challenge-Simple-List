@@ -17,6 +17,12 @@
       "email": "fulano@fulano@email.com",
       "image": "https://pbs.twimg.com/profile_images/1249959893479706624/Gp7rlzXs.jpg",
       "id": 3
+    },
+    {
+      "name": "nome2 ",
+      "email": "nome2@email.com",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE1TjFge34Fd4TIuqJ1aYcaSxlBNwmaUqhwA&usqp=CAU",
+      "id": 5
     }
   ]
 }
