@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserListService } from '../../core/user-list/user-list.service';
 import { User } from '../../core/user-list/user-interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { UserModalComponent } from '../user-modal/user-modal.component';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -10,7 +12,8 @@ export class UserListComponent implements OnInit {
   user: User[] = [];
   closeModal = true;
   constructor(
-    private userService: UserListService
+    private userService: UserListService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +56,13 @@ export class UserListComponent implements OnInit {
   }
 
   openModal(): void {
-    this.userService.changeModalStatus(false);
+    this.dialog.open(UserModalComponent, {
+      data: { user: this.user }
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
 
   }
 

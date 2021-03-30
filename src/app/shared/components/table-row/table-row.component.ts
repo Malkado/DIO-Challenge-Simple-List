@@ -26,10 +26,11 @@ export class TableRowComponent implements OnInit {
   ngOnInit(): void {
     // tslint:disable-next-line: deprecation
     this.userService.modalClose.subscribe(status => {
+      console.log(status);
       if (status) {
         this.setCloseModal();
       }
-      else {
+      else if (status === false) {
         this.setOpenModal();
       }
     });
@@ -48,6 +49,7 @@ export class TableRowComponent implements OnInit {
   openCreate(): void {
     this.isUpdating = false;
   }
+
   openUpdate(): void {
     this.isUpdating = true;
 
